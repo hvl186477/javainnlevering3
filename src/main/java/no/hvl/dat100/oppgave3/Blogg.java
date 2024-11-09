@@ -5,68 +5,75 @@ import no.hvl.dat100.oppgave1.*;
 
 public class Blogg {
 
-	// TODO: objektvariable 
+	private Innlegg[] innleggtabell;
+	private int antall;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this(20);
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this.innleggtabell = new Innlegg[lengde];
+		this.antall = 0;
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return antall;
 	}
-	
+
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+		return innleggtabell;
 
 	}
-	
-	public int finnInnlegg(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+	public int finnInnlegg(Innlegg innlegg) {
+		for (int pos = 0; pos < antall; pos++) {
+			if (innleggtabell[pos].erLik(innlegg)) {
+				return pos;
+			}
+		}
+		return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+
+		for (int pos = 0; pos < antall; pos++) {
+			if (innleggtabell[pos].erLik(innlegg)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
+		return antall < innleggtabell.length;
 
 	}
-	
+
 	public boolean leggTil(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		if (finnes(innlegg)) {
+			return false;
+		}
+
+		if (ledigPlass()) {
+			innleggtabell[antall] = innlegg;
+			antall++;
+			return true;
+		}
+
+		return false;
 	}
-	
+
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
-	}
-
-	// valgfrie oppgaver nedenfor
-	
-	public void utvid() {
-		throw new UnsupportedOperationException(TODO.method());
-	}
-	
-	public boolean leggTilUtvid(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		StringBuilder sb = new StringBuilder();
+		sb.append(antall).append("\n");
 		
-	}
-	
-	public boolean slett(Innlegg innlegg) {
+		for (int i = 0; i<antall; i++) {
+			sb.append(innleggtabell[i].toString());
+		}		
+		return sb.toString();
 		
-		throw new UnsupportedOperationException(TODO.method());
-	}
-	
-	public int[] search(String keyword) {
-		
-		throw new UnsupportedOperationException(TODO.method());
-
 	}
 }
